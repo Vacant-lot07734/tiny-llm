@@ -12,7 +12,11 @@ def linear(
     w: mx.array,
     bias: mx.array | None = None,
 ) -> mx.array:
-    pass
+    # outputs = mx.matmul(x, w.swapaxes(-2, -1))
+    outputs = mx.matmul(x, w.T)
+    if bias is not None:
+        outputs = outputs + bias
+    return outputs
 
 
 def silu(x: mx.array) -> mx.array:
