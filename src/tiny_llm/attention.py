@@ -18,6 +18,17 @@ def scaled_dot_product_attention_simple(
     scale: float | None = None,
     mask: mx.array | None = None,
 ) -> mx.array:
+    """
+    Scaled Dot-Product Attention:
+        Attention(Q, K, V) = softmax( QK^T / sqrt(d_k) + M) V
+    where:
+        - Q: query   [batch, ..., seq_len, d_k]
+        - K: key     [batch, ..., seq_len, d_k]
+        - V: value   [batch, ..., seq_len, d_v]
+        - d_k: dimension of keys/queries
+        - M: optional mask to prevent attention to certain positions
+        scale factor can be specified.
+    """
     factor = mx.rsqrt(query.shape[-1]) if scale is None else scale
     score = mx.matmul(query, key.swapaxes(-1, -2)) * factor
     if mask is not None:
