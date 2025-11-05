@@ -46,6 +46,12 @@ class SimpleMultiHeadAttention:
         wv: mx.array,
         wo: mx.array,
     ):
+        """
+        MultiHead(Q,K,V)=Concat(head_1, ... , head_h) W^O
+        where:
+            head_i=Attention(QW_i^Q, KW_i^K, VW_i^V).
+        然公式上写成多个 head 独立计算，但实现上通常是一次大矩阵乘法并行完成的(高效并行计算)
+        """
         self.hidden_size = hidden_size
         self.num_heads = num_heads
         assert hidden_size % num_heads == 0
