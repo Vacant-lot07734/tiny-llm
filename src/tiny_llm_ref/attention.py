@@ -14,7 +14,7 @@ def scaled_dot_product_attention_simple(
     A simple implementation of scaled dot product attention. Assuming Q, K, V are of the same shape.
     Assuming mask is always a float array that you can add to the scores.
     """
-    factor = mx.rsqrt(query.shape[-1]) if scale is None else scale
+    factor = mx.rsqrt(mx.array(query.shape[-1])) if scale is None else scale
     scores = mx.matmul(query, key.swapaxes(-2, -1)) * factor
     if mask is not None:
         scores = scores + mask

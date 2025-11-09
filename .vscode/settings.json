@@ -1,3 +1,9 @@
 {
-    "cmake.ignoreCMakeListsMissing": true
+    "cmake.ignoreCMakeListsMissing": true,
+    "python.analysis.typeCheckingMode": "standard", // 或 "strict
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportPrivateImportUsage": "information",
+        "reportArgumentType": "information",
+        "reportReturnType": "warning",
+    }
 }
